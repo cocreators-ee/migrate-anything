@@ -6,6 +6,9 @@
     :target: https://github.com/psf/black
     :align: right
 
+.. image:: https://codecov.io/gh/Lieturd/migrate-anything/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/Lieturd/migrate-anything
+
 Migrate anything - database (etc.) migration utility, especially for Python projects.
 
 
