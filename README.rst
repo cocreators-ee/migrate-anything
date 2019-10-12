@@ -8,6 +8,7 @@
 
 .. image:: https://codecov.io/gh/Lieturd/migrate-anything/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/Lieturd/migrate-anything
+    :align: right
 
 Migrate anything - database (etc.) migration utility, especially for Python projects.
 
@@ -38,7 +39,7 @@ Simply put, create a Python package, don't be too clever and call it e.g. ``migr
     # migrations/__init__.py
     from migrate_anything import configure, CSVStorage
 
-    configure(storage=CSVStorage("test.csv"))
+    configure(storage=CSVStorage("migration_status.csv"))
 
 .. code-block:: python
 
@@ -54,7 +55,7 @@ Simply put, create a Python package, don't be too clever and call it e.g. ``migr
     def down():
         DB.delete_table("example")
 
-This would configure your migrations' status to be stored in a local folder called ``migration_status`` and set up your first migration script. If you have a ``my_db`` module that works like this you could just run this with the command
+This would configure your migrations' status to be stored in a local file called ``migration_status.csv`` and set up your first migration script. If you have a ``my_db`` module that works like this you could just run this with the command
 
 .. code-block:: shell
 
