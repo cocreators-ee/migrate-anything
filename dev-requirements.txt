@@ -1,5 +1,4 @@
 codecov==2.0.15
 pytest==4.1.1
-black==19.3b0
 twine==2.0.0
 wheel==0.33.6
