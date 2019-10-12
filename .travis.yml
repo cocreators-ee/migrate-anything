@@ -1,0 +1,35 @@
+# Disable sudo to speed up the build
+sudo: false
+
+language: python
+
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "pypy"
+  - "pypy3"
+
+install:
+  - pip install -r dev-requirements.txt
+
+script:
+  - coverage run -m pytest
+  - coverage report
+  - python setup.py sdist bdist_wheel
+
+deploy:
+  provider: pypi
+  user: "__token__"
+  password: $PYPI_TOKEN
+  skip_existing: true
+  edge: true
+  on:
+    branch: master
+    tags: true
+
+after_success:
+  - codecov

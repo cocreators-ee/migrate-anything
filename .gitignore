@@ -1,0 +1,13 @@
+.idea
+__pycache__
+.pytest_cache
+*.pyc
+*.bak
+*.log
+*.txt
+*.csv
+*.egg-info
+build
+dist
+MANIFEST
+.coverage
