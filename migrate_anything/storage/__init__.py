@@ -15,6 +15,12 @@ try:
 except ImportError:
     pymongo = None
 
+# Python 2 & 3 -compatibility
+try:
+    unicode("")
+except NameError:
+    unicode = str
+
 _CSVRow = namedtuple("Row", "name,code")
 
 
@@ -67,7 +73,7 @@ class CSVStorage(Storage):
     def save_migration(self, name, code):
         with open(self.file, "a", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([name, code])
+            writer.writerow([unicode(name), unicode(code)])
 
     def list_migrations(self):
         migrations = []
