@@ -11,6 +11,7 @@ from migrate_anything.tests.common import (
     WITHOUT_DOWN,
     WITHOUT_UP,
     clean_files,
+    remove_files,
 )
 
 MIGRATION_CODE = """
@@ -58,7 +59,9 @@ def test_check_module():
         _check_module(module)
 
 
-@clean_files([TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION])
+@clean_files(
+    [TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION, NEW_MIGRATION + "c"]
+)
 def test_run():
     storage = CSVStorage(TEST_CSV)
 
@@ -70,7 +73,7 @@ def test_run():
     assert len(first) > 0
     assert exists("test-file.txt")
 
-    with open(NEW_MIGRATION, "w", encoding="utf-8") as f:
+    with open(NEW_MIGRATION, "w") as f:
         f.write(MIGRATION_CODE)
 
     run(MIGRATIONS_PKG)
@@ -79,7 +82,7 @@ def test_run():
     assert len(second) > len(first)
     assert exists("test-file2.txt")
 
-    remove(NEW_MIGRATION)
+    remove_files([NEW_MIGRATION, NEW_MIGRATION + "c"])  # Py2 *.pyc
 
     run(MIGRATIONS_PKG)
     third = storage.list_migrations()

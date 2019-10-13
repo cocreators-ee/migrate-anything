@@ -26,7 +26,7 @@ def down():
 """
 
 
-def _remove_files(files):
+def remove_files(files):
     """
     Delete a bunch of files if they exist
     :param List[str] files:
@@ -48,11 +48,11 @@ def clean_files(files):
     def _decorator(f):
         @wraps(f)
         def _wraps(*args, **kwargs):
-            _remove_files(files)
+            remove_files(files)
             try:
                 f(*args, **kwargs)
             finally:
-                _remove_files(files)
+                remove_files(files)
 
         return _wraps
 

@@ -1,4 +1,5 @@
 import csv
+import sys
 import types
 from collections import namedtuple
 from io import open
@@ -15,11 +16,7 @@ try:
 except ImportError:
     pymongo = None
 
-# Python 2 & 3 -compatibility
-try:
-    unicode("")
-except NameError:
-    unicode = str
+PY3 = sys.version_info.major >= 3
 
 _CSVRow = namedtuple("Row", "name,code")
 
@@ -71,15 +68,22 @@ class CSVStorage(Storage):
         )
 
     def save_migration(self, name, code):
-        with open(self.file, "a", newline="", encoding="utf-8") as csvfile:
+        def _to_writable(value):
+            if PY3:
+                return value
+            else:
+                return value.encode("utf-8")
+
+        mode = "a" if PY3 else "ab"
+        with open(self.file, mode) as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([unicode(name), unicode(code)])
+            writer.writerow([_to_writable(name), _to_writable(code)])
 
     def list_migrations(self):
         migrations = []
 
         try:
-            with open(self.file, encoding="utf-8") as csvfile:
+            with open(self.file) as csvfile:
                 reader = csv.reader(csvfile)
                 for row in reader:
                     if not row:
@@ -95,7 +99,8 @@ class CSVStorage(Storage):
             migration for migration in self.list_migrations() if migration.name != name
         ]
 
-        with open(self.file, "w", encoding="utf-8") as csvfile:
+        mode = "w" if PY3 else "wb"
+        with open(self.file, mode) as csvfile:
             writer = csv.writer(csvfile)
             for row in migrations:
                 writer.writerow(row)
