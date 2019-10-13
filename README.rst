@@ -10,6 +10,9 @@
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=Lieturd_migrate-anything&metric=alert_status
     :target: https://sonarcloud.io/dashboard?id=Lieturd_migrate-anything
 
+.. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
+    :target: https://opensource.org/licenses/BSD-3-Clause
+
 Migrate anything - database (etc.) migration utility, especially for Python projects.
 
 
@@ -19,6 +22,14 @@ What is this?
 It's kinda annoying how often you run into the question of how to handle migrations in your project, and there hasn't seem to emerged any good, DB -agnostic, framework-agnostic, and storage-agnostic tool to manage them.
 
 This project is an attempt to change that.
+
+
+License
+-------
+
+Licensing is important. This project uses BSD 3-clause license, and adds no other dependencies to your project - that's about as simple, safe, and free to use as it gets.
+
+For more information check the `LICENSE <https://github.com/Lieturd/migrate-anything/blob/master/LICENSE>`_ -file.
 
 
 Usage examples
