@@ -1,5 +1,5 @@
-from functools import wraps
 import os
+from functools import wraps
 
 GOOD_CODE = """
 from time import time

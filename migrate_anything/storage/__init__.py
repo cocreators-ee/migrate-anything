@@ -64,15 +64,13 @@ class CSVStorage(Storage):
     def __init__(self, file):
         self.file = file
         logger.warning(
-            "Using CSV storage - hopefully you're just testing or know what you're doing as this data can be easily lost."
+            "Using CSV storage - hopefully you're just testing "
+            "or know what you're doing as this data can be easily lost."
         )
 
     def save_migration(self, name, code):
         def _to_writable(value):
-            if PY3:
-                return value
-            else:
-                return value.encode("utf-8")
+            return value if PY3 else value.encode("utf-8")
 
         mode = "a" if PY3 else "ab"
         with open(self.file, mode) as csvfile:

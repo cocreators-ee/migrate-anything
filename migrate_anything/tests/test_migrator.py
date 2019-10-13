@@ -1,5 +1,4 @@
 import imp
-from os import remove
 from os.path import join, dirname, sep, exists
 
 import pytest
