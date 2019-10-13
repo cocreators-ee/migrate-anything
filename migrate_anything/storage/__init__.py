@@ -10,6 +10,11 @@ try:
 except ImportError:
     imap = map
 
+try:
+    import pymongo
+except ImportError:
+    pymongo = None
+
 _CSVRow = namedtuple("Row", "name,code")
 
 
@@ -74,7 +79,7 @@ class CSVStorage(Storage):
                     if not row:
                         continue
                     migrations.append(_CSVRow(*row))
-        except FileNotFoundError:
+        except IOError:
             pass
 
         return migrations
@@ -90,4 +95,30 @@ class CSVStorage(Storage):
                 writer.writerow(row)
 
 
-__all__ = ["CSVStorage"]
+@_fix_docs
+class MongoDBStorage(Storage):
+    INDEX = "name"
+
+    def __init__(self, collection):
+        """
+        :param pymongo.collection.Collection collection:
+        """
+        if not pymongo:
+            raise Exception("Cannot load pymongo, is it installed?")
+
+        self.collection = collection
+
+        if self.INDEX not in collection.index_information():
+            collection.create_index(self.INDEX, unique=True)
+
+    def save_migration(self, name, code):
+        self.collection.insert_one({"name": name, "code": code})
+
+    def list_migrations(self):
+        return [(e["name"], e["code"]) for e in self.collection.find()]
+
+    def remove_migration(self, name):
+        self.collection.delete_one({"name": name})
+
+
+__all__ = ["CSVStorage", "MongoDBStorage"]

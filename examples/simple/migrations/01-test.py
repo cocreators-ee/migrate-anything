@@ -13,6 +13,6 @@ def down():
     with open(file) as f:
         old = float(f.read())
         diff = abs(time() - old)
-        if diff > 0.5:
+        if diff > 1:
             raise Exception("Something is wrong")
     remove(file)

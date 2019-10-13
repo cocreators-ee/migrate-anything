@@ -61,22 +61,25 @@ This would configure your migrations' status to be stored in a local file called
 
     migrate-anything migrations
 
-Now in the real world you might want something more durable and a realistic example, so here's another (still hypothetical) version:
+Now in the real world you might want something more durable and a realistic example, so here's e.g. what you'd do when using MongoDB:
 
 .. code-block:: python
 
     # __init__.py
-    from migrate_anything import configure, KubernetesConfigMap
+    from migrate_anything import configure, MongoDBStorage
+    import pymongo
 
-    configure(storage=KubernetesConfigMap("migrate-anything-status"))
+    db = pymongo.MongoClient().my_db
+
+    configure(storage=MongoDBStorage(db.migrations))
 
 .. code-block:: python
 
     # 01-initialize-db.py
     from pymongo import MongoClient
 
-    client = MongoClient()  # Hope you're really not using defaults
-    db = client.testdb
+    client = MongoClient()
+    db = client.my_db
 
     def up():
         db.posts.insert_one({
@@ -89,9 +92,15 @@ Now in the real world you might want something more durable and a realistic exam
     def down():
         db.posts.drop()
 
-This would configure storage to a Kubernetes ConfigMap (if that class existed), and run migrations to MongoDB. There's also going to be storage modules to MongoDB available but this is way cooler.
+This would configure storage to a ``my_db.migrations`` MongoDB collection.
 
-Oh and your Kubernetes pods will likely require the necessary RBAC rules to manage their ConfigMap. It's unfortunately kinda complex, but I'm sure you can figure it out e.g. with this `guide <https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/>`_. Alternatively you can just use the MongoDB storage, or write your own - it's easy.
+Future ideas include support for other DB engines (feel free to contribute),
+and Kubernetes ConfigMap. Annoyingly storage to Kubernetes from inside a pod
+and in code is not quite as simple as just running ``kubectl``.
+
+Oh and your Kubernetes pods will likely require the necessary RBAC rules to manage their ConfigMap. It's unfortunately kinda complex, but I'm sure you can figure it out e.g. with this `guide <https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/>`_.
+
+Alternatively you can just write your own - it's easy.
 
 .. code-block:: python
 

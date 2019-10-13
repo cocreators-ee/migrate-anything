@@ -18,12 +18,9 @@ echo Undoing old migration
 echo
 
 rm -f migrations/02-test.py
+find . -name "*.pyc" -delete
 migrate-anything migrations
 if [ -f "test-file.txt" ]; then
     echo Undo did not work.
     exit 1
 fi
-
-echo
-echo Cleaning up
-rm -f test.csv test-file.txt

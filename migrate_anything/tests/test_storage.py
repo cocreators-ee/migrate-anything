@@ -1,10 +1,11 @@
 from collections import OrderedDict
 from os.path import dirname, join
 
+import mongomock
 import pytest
 
 from migrate_anything.migrator import _encode_code
-from migrate_anything.storage import CSVStorage, Storage
+from migrate_anything.storage import CSVStorage, Storage, MongoDBStorage
 from migrate_anything.tests.common import GOOD_CODE, clean_files
 
 MIGRATIONS = OrderedDict([("01-test", _encode_code(GOOD_CODE))])
@@ -34,7 +35,6 @@ def test_csv_storage():
     s = CSVStorage(TEST_CSV)
     for name in MIGRATIONS:
         s.save_migration(name, MIGRATIONS[name])
-        break
 
     received = s.list_migrations()
     assert len(s.list_migrations()) == len(MIGRATIONS)
@@ -46,3 +46,24 @@ def test_csv_storage():
         s.remove_migration(name)
 
     assert len(s.list_migrations()) == 0
+
+
+def test_mongodb_storage():
+    db = mongomock.MongoClient().test_db
+    s = MongoDBStorage(db.migrations)
+
+    for name in MIGRATIONS:
+        s.save_migration(name, MIGRATIONS[name])
+
+    received = s.list_migrations()
+    assert len(s.list_migrations()) == len(MIGRATIONS)
+    for name, code in received:
+        assert name in MIGRATIONS
+        assert code == MIGRATIONS[name]
+    assert db.migrations.count_documents({}) == len(MIGRATIONS)
+
+    for name in MIGRATIONS:
+        s.remove_migration(name)
+
+    assert len(s.list_migrations()) == 0
+    assert db.migrations.count_documents({}) == 0
