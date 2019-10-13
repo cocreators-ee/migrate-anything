@@ -66,11 +66,13 @@ Simply put, create a Python package, don't be too clever and call it e.g. ``migr
     def down():
         DB.delete_table("example")
 
-This would configure your migrations' status to be stored in a local file called ``migration_status.csv`` and set up your first migration script. If you have a ``my_db`` module that works like this you could just run this with the command
+This would configure your migrations' status to be stored in a local file called ``migration_status.csv`` and set up your first migration script. If you have a ``my_db`` module that works like this you could just run this with a single command:
 
 .. code-block:: shell
 
     migrate-anything migrations
+    poetry run migrate-anything migrations
+    pipenv run migrate-anything migrations
 
 Now in the real world you might want something more durable and a realistic example, so here's e.g. what you'd do when using MongoDB:
 
