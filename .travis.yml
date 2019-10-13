@@ -24,6 +24,8 @@ script:
       python setup.py sdist bdist_wheel;
       twine check dist/*;
       coverage xml -i;
+      mkdir coverage-reports;
+      mv coverage.xml coverage-reports/coverage-python.xml;
       sonar-scanner;
     fi
 
