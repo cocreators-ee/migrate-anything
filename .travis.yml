@@ -18,7 +18,6 @@ install:
 
 script:
   - coverage run --include "migrate_anything/*" -m pytest
-  - coverage report
   - if [[ "$TRAVIS_PYTHON_VERSION" == "3.6" ]]; then
       python setup.py sdist bdist_wheel;
       twine check dist/*;

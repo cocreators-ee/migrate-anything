@@ -26,16 +26,12 @@ def configure(storage):
     _CONFIG.storage = storage
 
 
-def _encode_module(module):
+def _encode_code(code):
     """
-    Convert a Python module to encoded code
-    :param types.Module module:
+    Convert source code to encoded format
+    :param str code:
     :return str:
     """
-    src = inspect.getsourcefile(module)
-    with open(src) as file:
-        code = file.read()
-
     if PY3:
         code = code.encode("utf-8")
 
@@ -44,7 +40,27 @@ def _encode_module(module):
     if PY3:
         code = code.decode("utf-8")
 
-    return code.strip()
+    return code
+
+
+def _decode_code(encoded):
+    """
+    Convert encoded code to readable format
+    :param str encoded:
+    :return str:
+    """
+    return base64.b64decode(encoded)
+
+
+def _encode_module(module):
+    """
+    Convert a Python module to encoded code
+    :param types.Module module:
+    :return str:
+    """
+    src = inspect.getsourcefile(module)
+    with open(src) as file:
+        return _encode_code(file.read())
 
 
 def _decode_module(name, b64):
@@ -54,7 +70,7 @@ def _decode_module(name, b64):
     :return types.Module:
     """
     module = imp.new_module(name)
-    exec (base64.b64decode(b64), module.__dict__)
+    exec (_decode_code(b64), module.__dict__)
     return module
 
 

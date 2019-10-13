@@ -55,7 +55,7 @@ class Storage(object):
 class CSVStorage(Storage):
     def __init__(self, file):
         self.file = file
-        logger.warn(
+        logger.warning(
             "Using CSV storage - hopefully you're just testing or know what you're doing as this data can be easily lost."
         )
 
