@@ -58,7 +58,7 @@ def test_check_module():
         _check_module(module)
 
 
-@clean_files([TEST_CSV, "test-file.txt", "test-file2.txt"])
+@clean_files([TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION])
 def test_run():
     storage = CSVStorage(TEST_CSV)
 
