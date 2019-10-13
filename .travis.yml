@@ -1,6 +1,8 @@
 # Disable sudo to speed up the build
 sudo: false
 
+dist: trusty
+
 language: python
 
 python:
@@ -18,8 +20,11 @@ install:
 script:
   - coverage run -m pytest
   - coverage report
-  - python setup.py sdist bdist_wheel
-  - twine check dist/*
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "3.6" ]]; then
+      python setup.py sdist bdist_wheel;
+      twine check dist/*;
+      sonar-scanner;
+    fi
 
 deploy:
   provider: pypi
@@ -30,6 +35,11 @@ deploy:
   on:
     branch: master
     tags: true
+
+addons:
+  sonarcloud:
+    organization: "lieturd"
+    token: $SONAR_TOKEN
 
 after_success:
   - codecov
