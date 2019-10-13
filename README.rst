@@ -10,6 +10,10 @@
     :target: https://codecov.io/gh/Lieturd/migrate-anything
     :align: right
 
+.. image:: https://sonarcloud.io/api/project_badges/measure?project=Lieturd_migrate-anything&metric=alert_status
+    :target: https://sonarcloud.io/dashboard?id=Lieturd_migrate-anything
+    :align: right
+
 Migrate anything - database (etc.) migration utility, especially for Python projects.
 
 
