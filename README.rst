@@ -130,4 +130,4 @@ Oh and your Kubernetes pods will likely require the necessary RBAC rules to mana
 
     configure(storage=CustomStorage("test.txt"))
 
-You can also check out the `examples <https://github.com/lieturd/migrate-anything/examples>`_.
+You can also check out the `examples <https://github.com/Lieturd/migrate-anything/tree/master/examples>`_.
