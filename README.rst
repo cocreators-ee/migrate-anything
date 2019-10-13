@@ -10,8 +10,25 @@
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=Lieturd_migrate-anything&metric=alert_status
     :target: https://sonarcloud.io/dashboard?id=Lieturd_migrate-anything
 
+.. image:: https://img.shields.io/github/issues/lieturd/migrate-anything
+    :target: https://github.com/Lieturd/migrate-anything/issues
+    :alt: GitHub issues
+
+.. image:: https://img.shields.io/pypi/dm/migrate-anything
+    :target: https://pypi.org/project/migrate-anything/
+    :alt: PyPI - Downloads
+
+.. image:: https://img.shields.io/pypi/v/migrate-anything
+    :target: https://pypi.org/project/migrate-anything/
+    :alt: PyPI
+
+.. image:: https://img.shields.io/pypi/pyversions/migrate-anything
+    :target: https://pypi.org/project/migrate-anything/
+    :alt: PyPI - Python Version
+
 .. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
     :target: https://opensource.org/licenses/BSD-3-Clause
+
 
 Migrate anything - database (etc.) migration utility, especially for Python projects.
 
@@ -27,7 +44,7 @@ This project is an attempt to change that.
 License
 -------
 
-Licensing is important. This project uses BSD 3-clause license, and adds no other dependencies to your project - that's about as simple, safe, and free to use as it gets.
+Licensing is important. This project uses BSD 3-clause license, and adds no other dependencies to your project (it does use a few things during build & testing) - that's about as simple, safe, and free to use as it gets.
 
 For more information check the `LICENSE <https://github.com/Lieturd/migrate-anything/blob/master/LICENSE>`_ -file.
 
@@ -153,3 +170,9 @@ Alternatively you can just write your own - it's easy.
     configure(storage=CustomStorage("test.txt"))
 
 You can also check out the `examples <https://github.com/Lieturd/migrate-anything/tree/master/examples>`_.
+
+
+Contributing
+============
+
+This project is run on GitHub using the issue tracking and pull requests here. If you want to contribute, feel free to `submit issues <https://github.com/Lieturd/migrate-anything/issues>`_ (incl. feature requests) or PRs here.
