@@ -35,7 +35,7 @@ def _remove_files(files):
         try:
             os.remove(file)
             print ("Removed {}".format(file))
-        except FileNotFoundError:
+        except OSError:
             pass
 
 
