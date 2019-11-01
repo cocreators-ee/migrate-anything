@@ -91,6 +91,7 @@ def test_run():
     assert exists("test-file2.txt")
 
     clean_filesystem([NEW_MIGRATION])
+    invalidate_caches()  # Reset import caches
 
     run(MIGRATIONS_PKG)
     third = storage.list_migrations()

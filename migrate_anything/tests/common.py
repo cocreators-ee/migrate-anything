@@ -52,11 +52,13 @@ def remove_files(files):
     :param List[str] files:
     """
     for file in files:
-        try:
-            rmtree(file)
-            print ("Removed {}".format(file))
-        except OSError:
-            pass
+        if os.path.exists(file):
+            if file.startswith("./") or file.startswith(".\\"):
+                file = file[2:]
+            if os.path.isdir(file):
+                rmtree(file)
+            else:
+                os.unlink(file)
 
 
 def clean_filesystem(files=[]):
