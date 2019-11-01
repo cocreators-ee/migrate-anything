@@ -10,8 +10,16 @@ from migrate_anything.tests.common import (
     WITHOUT_DOWN,
     WITHOUT_UP,
     clean_files,
-    remove_files,
+    clean_filesystem,
 )
+
+try:
+    from importlib import invalidate_caches
+except ImportError:
+
+    def invalidate_caches():
+        pass
+
 
 MIGRATION_CODE = """
 from os import remove
@@ -58,9 +66,7 @@ def test_check_module():
         _check_module(module)
 
 
-@clean_files(
-    [TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION, NEW_MIGRATION + "c"]
-)
+@clean_files([TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION])
 def test_run():
     storage = CSVStorage(TEST_CSV)
 
@@ -75,13 +81,16 @@ def test_run():
     with open(NEW_MIGRATION, "w") as f:
         f.write(MIGRATION_CODE)
 
+    clean_filesystem()
+    invalidate_caches()  # Reset import caches
+
     run(MIGRATIONS_PKG)
     second = storage.list_migrations()
 
     assert len(second) > len(first)
     assert exists("test-file2.txt")
 
-    remove_files([NEW_MIGRATION, NEW_MIGRATION + "c"])  # Py2 *.pyc
+    clean_filesystem([NEW_MIGRATION])
 
     run(MIGRATIONS_PKG)
     third = storage.list_migrations()
