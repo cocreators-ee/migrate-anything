@@ -4,3 +4,4 @@ twine>=1.15.0
 wheel==0.33.6
 mongomock==3.18.0
 pymongo==3.9.0
+python-arango==5.2.1
