@@ -40,6 +40,12 @@ It's kinda annoying how often you run into the question of how to handle migrati
 
 This project is an attempt to change that.
 
+Basically what it does when you run :code:`migrate-anything migrations` is:
+
+1. Find all the files :code:`migrations/*.py` and sort them
+2. Any that are not yet registered in the DB will be loaded, their :code:`up()` is executed, and the file's contents stored in the DB
+3. Any files that are missing from the fs but are in the DB will have their code loaded from the DB and their :code:`down()` is executed - in reverse order
+
 
 License
 -------
