@@ -35,11 +35,11 @@ def find_cache_files():
     """
     files = []
 
-    for root, dirnames, filenames in os.walk("src"):
+    for root, dirnames, filenames in os.walk("."):
         for filename in fnmatch.filter(filenames, "*.pyc"):
             files.append(os.path.join(root, filename))
 
-    for root, dirnames, filenames in os.walk("src"):
+    for root, dirnames, filenames in os.walk("."):
         for filename in fnmatch.filter(filenames, "__pycache__"):
             files.append(os.path.join(root, filename))
 
