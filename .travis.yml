@@ -24,7 +24,7 @@ script:
       coverage xml -i;
       mkdir coverage-reports;
       mv coverage.xml coverage-reports/coverage-python.xml;
-      sonar-scanner;
+      if which sonar-scanner > /dev/null; then sonar-scanner; fi;
     fi
 
 deploy:
