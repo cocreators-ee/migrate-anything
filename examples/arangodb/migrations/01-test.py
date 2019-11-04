@@ -1,5 +1,8 @@
 from arango import ArangoClient
 
+# Don't actually put your credentials in these files as they get stored in
+# the DB in readable format. You should rather just import the `db` from some
+# other location.
 client = ArangoClient(hosts="https://example.com:8529/")
 db = client.db(name="my_db", username="root", password="supersecret")
 
