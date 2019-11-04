@@ -29,7 +29,6 @@
 .. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
     :target: https://opensource.org/licenses/BSD-3-Clause
 
-
 Migrate anything - database (etc.) migration utility, especially for Python projects.
 
 
