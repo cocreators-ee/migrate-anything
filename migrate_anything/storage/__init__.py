@@ -16,6 +16,12 @@ try:
 except ImportError:
     pymongo = None
 
+try:
+    import arango
+    import arango.collection
+except ImportError:
+    arango = None
+
 PY3 = sys.version_info.major >= 3
 
 _CSVRow = namedtuple("Row", "name,code")
@@ -57,6 +63,61 @@ class Storage(object):
         :param str name:
         """
         raise NotImplementedError("Storage class does not implement remove_migration")
+
+
+@_fix_docs
+class ArangoDBStorage(Storage):
+    INDEX = ["name"]
+
+    def __init__(self, collection, db=None, *args, **kwargs):
+        """
+        :param Union[arango.collection.Collection, str] collection: Either the
+        Collection to store the migrations in, or the name of the collection.
+        If the name is given, then the database must also be given.
+        :param Optional[arango.database.Database] db: The arango database, only
+        needed if the collection name is given rather than the collection.
+        :param args: Positional arguments used if creating the collection
+        :param kwargs: Keyword arguments used if creating the collection
+        """
+        if not arango:
+            raise Exception("Cannot load arango, is it installed?")
+
+        if not isinstance(collection, arango.collection.Collection):
+            collection = self._get_collection(collection, db, *args, **kwargs)
+
+        self.collection = collection
+
+    @classmethod
+    def _get_collection(cls, name, db, *args, **kwargs):
+        """
+        Get the collection for storing migrations. Creates it if needed.
+
+        :param arango.database.Database db: The database
+        :param str name: The name of the collection
+        :param args: Positional arguments used if creating the collection
+        :param kwargs: Keyword arguments used if creating the collection
+        :return arango.collection.Collection: The collection
+        """
+        if not db:
+            raise RuntimeError("Can not create collection without db.")
+
+        if not db.has_collection(name):
+            collection = db.create_collection(name,
+                                              *args, **kwargs)
+            collection.add_hash_index(cls.INDEX, unique=True)
+        else:
+            collection = db.collection(name)
+
+        return collection
+
+    def save_migration(self, name, code):
+        self.collection.insert({"name": name, "code": code})
+
+    def list_migrations(self):
+        return [(e["name"], e["code"]) for e in self.collection.all()]
+
+    def remove_migration(self, name):
+        self.collection.delete_match({"name": name}, limit=1)
 
 
 @_fix_docs
@@ -130,4 +191,4 @@ class MongoDBStorage(Storage):
         self.collection.delete_one({"name": name})
 
 
-__all__ = ["CSVStorage", "MongoDBStorage"]
+__all__ = ["ArangoDBStorage", "CSVStorage", "MongoDBStorage"]
