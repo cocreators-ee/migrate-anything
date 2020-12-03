@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/lieturd/migrate-anything.svg?branch=master
-    :target: https://travis-ci.org/lieturd/migrate-anything
+.. image:: https://travis-ci.org/cocreators-ee/migrate-anything.svg?branch=master
+    :target: https://travis-ci.org/cocreators-ee/migrate-anything
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
@@ -10,7 +10,7 @@
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=Lieturd_migrate-anything&metric=alert_status
     :target: https://sonarcloud.io/dashboard?id=Lieturd_migrate-anything
 
-.. image:: https://img.shields.io/github/issues/lieturd/migrate-anything
+.. image:: https://img.shields.io/github/issues/cocreators-ee/migrate-anything
     :target: https://github.com/Lieturd/migrate-anything/issues
     :alt: GitHub issues
 
