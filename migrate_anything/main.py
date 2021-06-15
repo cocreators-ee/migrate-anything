@@ -7,7 +7,7 @@ def main():
     ap = ArgumentParser(
         prog="migrate-anything",
         description="Helps manage migrations for databases and anything else",
-        epilog="For more information check out https://github.com/Lieturd/migrate-anything",
+        epilog="For more information check out https://github.com/cocreators-ee/migrate-anything",
     )
 
     ap.add_argument(
