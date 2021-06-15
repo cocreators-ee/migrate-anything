@@ -4,14 +4,14 @@
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 
-.. image:: https://codecov.io/gh/Lieturd/migrate-anything/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/Lieturd/migrate-anything
+.. image:: https://codecov.io/gh/cocreators-ee/migrate-anything/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/cocreators-ee/migrate-anything
 
 .. image:: https://sonarcloud.io/api/project_badges/measure?project=Lieturd_migrate-anything&metric=alert_status
     :target: https://sonarcloud.io/dashboard?id=Lieturd_migrate-anything
 
 .. image:: https://img.shields.io/github/issues/cocreators-ee/migrate-anything
-    :target: https://github.com/Lieturd/migrate-anything/issues
+    :target: https://github.com/cocreators-ee/migrate-anything/issues
     :alt: GitHub issues
 
 .. image:: https://img.shields.io/pypi/dm/migrate-anything
