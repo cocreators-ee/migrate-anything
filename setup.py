@@ -14,9 +14,9 @@ setup(
     description="Helps manage migrations for databases and anything else",
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    url="https://github.com/Lieturd/migrate-anything",
-    author="Lieturd OÜ",
-    author_email="janne@lieturd.com",
+    url="https://github.com/cocreators-ee/migrate-anything",
+    author="Cocreators OÜ",
+    author_email="janne@cocreators.ee",
     packages=["migrate_anything", "migrate_anything.storage"],
     keywords="migrate database db release",
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4",
@@ -29,7 +29,7 @@ setup(
         "Programming Language :: Python :: 3.7",
     ],
     project_urls={
-        "Bug Reports": "https://github.com/Lieturd/migrate-anything/issues",
-        "Source": "https://github.com/Lieturd/migrate-anything/",
+        "Bug Reports": "https://github.com/cocreators-ee/migrate-anything/issues",
+        "Source": "https://github.com/cocreators-ee/migrate-anything/",
     },
 )
