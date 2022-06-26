@@ -51,17 +51,17 @@ NEW_MIGRATION = join(MIGRATIONS_PATH, "02-good-code.py")
 
 def test_check_module():
     module = imp.new_module("test")
-    exec (GOOD_CODE, module.__dict__)
+    exec(GOOD_CODE, module.__dict__)
 
     _check_module(module)
 
     module = imp.new_module("test2")
-    exec (WITHOUT_DOWN, module.__dict__)
+    exec(WITHOUT_DOWN, module.__dict__)
     with pytest.raises(Exception):
         _check_module(module)
 
     module = imp.new_module("test3")
-    exec (WITHOUT_UP, module.__dict__)
+    exec(WITHOUT_UP, module.__dict__)
     with pytest.raises(Exception):
         _check_module(module)
 

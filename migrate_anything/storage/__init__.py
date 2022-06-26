@@ -102,8 +102,7 @@ class ArangoDBStorage(Storage):
             raise RuntimeError("Can not create collection without db.")
 
         if not db.has_collection(name):
-            collection = db.create_collection(name,
-                                              *args, **kwargs)
+            collection = db.create_collection(name, *args, **kwargs)
             collection.add_hash_index(cls.INDEX, unique=True)
         else:
             collection = db.collection(name)

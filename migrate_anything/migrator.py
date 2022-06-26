@@ -70,7 +70,7 @@ def _decode_module(name, b64):
     :return types.Module:
     """
     module = imp.new_module(name)
-    exec (_decode_code(b64), module.__dict__)
+    exec(_decode_code(b64), module.__dict__)
     return module
 
 

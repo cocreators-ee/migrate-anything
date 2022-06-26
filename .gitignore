@@ -12,3 +12,4 @@ dist
 MANIFEST
 .coverage
 coverage.xml
+.venv

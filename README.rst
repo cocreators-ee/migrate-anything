@@ -7,8 +7,8 @@
 .. image:: https://codecov.io/gh/cocreators-ee/migrate-anything/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/cocreators-ee/migrate-anything
 
-.. image:: https://sonarcloud.io/api/project_badges/measure?project=Lieturd_migrate-anything&metric=alert_status
-    :target: https://sonarcloud.io/dashboard?id=Lieturd_migrate-anything
+.. image:: https://sonarcloud.io/api/project_badges/measure?project=cocreators_migrate-anything&metric=alert_status
+    :target: https://sonarcloud.io/dashboard?id=cocreators_migrate-anything
 
 .. image:: https://img.shields.io/github/issues/cocreators-ee/migrate-anything
     :target: https://github.com/cocreators-ee/migrate-anything/issues
@@ -51,7 +51,7 @@ License
 
 Licensing is important. This project uses BSD 3-clause license, and adds no other dependencies to your project (it does use a few things during build & testing) - that's about as simple, safe, and free to use as it gets.
 
-For more information check the `LICENSE <https://github.com/Lieturd/migrate-anything/blob/master/LICENSE>`_ -file.
+For more information check the `LICENSE <https://github.com/cocreators-ee/migrate-anything/blob/master/LICENSE>`_ -file.
 
 
 Usage examples
@@ -174,13 +174,37 @@ Alternatively you can just write your own - it's easy.
 
     configure(storage=CustomStorage("test.txt"))
 
-You can also check out the `examples <https://github.com/Lieturd/migrate-anything/tree/master/examples>`_.
+You can also check out the `examples <https://github.com/cocreators-ee/migrate-anything/tree/master/examples>`_.
 
 
 Contributing
 ============
 
-This project is run on GitHub using the issue tracking and pull requests here. If you want to contribute, feel free to `submit issues <https://github.com/Lieturd/migrate-anything/issues>`_ (incl. feature requests) or PRs here.
+This project is run on GitHub using the issue tracking and pull requests here. If you want to contribute, feel free to `submit issues <https://github.com/cocreators-ee/migrate-anything/issues>`_ (incl. feature requests) or PRs here.
+
+You will need `pre-commit <https://pre-commit.com/#install>`_ set up to make contributions.
+
+To set up development tools for this, run:
+
+.. code-block:: shell
+
+    pre-commit install
+    virtualenv .venv
+
+    .venv/bin/activate
+    # OR
+    .venv\Scripts\activate.bat
+
+    pip install -r dev-requirements.txt
+    pip install -e .
+
+And then to run the tests
+
+.. code-block:: shell
+
+    pytest
+
+When you have improvements to make, commit (and include any cleanup pre-commit might do), push your changes to your own fork, make a PR.
 
 
 Financial support
