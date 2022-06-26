@@ -147,7 +147,37 @@ def _apply_migrations(migrations):
         _CONFIG.storage.save_migration(name, _encode_module(module))
 
 
-def run(package):
+def run(package, down):
+    if down:
+        run_one_down(package)
+    else:
+        run_auto_mode(package)
+
+
+def run_one_down(package):
+    migrations = _load_package(package)
+    _check_config()
+
+    # Calculate diffs
+    applied = OrderedDict(_CONFIG.storage.list_migrations())
+    applied_keys = sorted(set(applied.keys()))
+    current_keys = sorted(set(migrations.keys()))
+
+    # Select the latest applied key
+    last_run_migration = applied_keys[-1]
+
+    # Check to make sure the migration exists
+    migration_exists = last_run_migration in current_keys
+
+    if migration_exists:
+        module = migrations[last_run_migration]
+        module.down()
+        _CONFIG.storage.remove_migration(last_run_migration)
+    else:
+        raise Exception("Unable to find module for {}".format(last_run_migration))
+
+
+def run_auto_mode(package):
     """
     Run the complete process
     :param str package: Name of the package that defines the migrations
