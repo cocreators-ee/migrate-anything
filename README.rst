@@ -138,7 +138,7 @@ Command line flags
 
 .. code-block:: shell
 
-    #Revert the last migration using migration code file.
+    # Revert the last migration using migration code file.
     migrate-anything migrations --revert-latest
 
 
