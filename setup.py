@@ -10,7 +10,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 setup(
     name="migrate-anything",
     entry_points={"console_scripts": ["migrate-anything = migrate_anything.main:main"]},
-    version="0.1.7",
+    version="0.1.8",
     description="Helps manage migrations for databases and anything else",
     long_description=long_description,
     long_description_content_type="text/x-rst",
