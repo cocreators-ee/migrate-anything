@@ -147,7 +147,7 @@ def _apply_migrations(migrations):
         _CONFIG.storage.save_migration(name, _encode_module(module))
 
 
-def run(package, down):
+def run(package, down=False):
     if down:
         run_one_down(package)
     else:
@@ -164,7 +164,11 @@ def run_one_down(package):
     current_keys = sorted(set(migrations.keys()))
 
     # Select the latest applied key
-    last_run_migration = applied_keys[-1]
+    try:
+        last_run_migration = applied_keys[-1]
+    except IndexError:
+        logger.info("No migrations to rollback found.")
+        return
 
     # Check to make sure the migration exists
     migration_exists = last_run_migration in current_keys
@@ -174,7 +178,7 @@ def run_one_down(package):
         module.down()
         _CONFIG.storage.remove_migration(last_run_migration)
     else:
-        raise Exception("Unable to find module for {}".format(last_run_migration))
+        logger.info("Unable to find module for {}".format(last_run_migration))
 
 
 def run_auto_mode(package):

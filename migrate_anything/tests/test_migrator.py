@@ -69,11 +69,10 @@ def test_check_module():
 @clean_files([TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION])
 def test_run():
     storage = CSVStorage(TEST_CSV)
-    down_mode = False
 
     assert len(storage.list_migrations()) == 0
 
-    run(MIGRATIONS_PKG, down_mode)
+    run(MIGRATIONS_PKG)
     first = storage.list_migrations()
 
     assert len(first) > 0
@@ -85,7 +84,7 @@ def test_run():
     clean_filesystem()
     invalidate_caches()  # Reset import caches
 
-    run(MIGRATIONS_PKG, down_mode)
+    run(MIGRATIONS_PKG)
     second = storage.list_migrations()
 
     assert len(second) > len(first)
@@ -94,7 +93,40 @@ def test_run():
     clean_filesystem([NEW_MIGRATION])
     invalidate_caches()  # Reset import caches
 
-    run(MIGRATIONS_PKG, down_mode)
+    run(MIGRATIONS_PKG)
+    third = storage.list_migrations()
+
+    assert third == first
+    assert not exists("test-file2.txt")
+
+
+@clean_files([TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION])
+def test_run_with_down_mode():
+    storage = CSVStorage(TEST_CSV)
+
+    assert len(storage.list_migrations()) == 0
+
+    run(MIGRATIONS_PKG)
+    first = storage.list_migrations()
+
+    assert len(first) > 0
+    assert exists("test-file.txt")
+
+    with open(NEW_MIGRATION, "w") as f:
+        f.write(MIGRATION_CODE)
+
+    clean_filesystem()
+    invalidate_caches()  # Reset import caches
+
+    run(MIGRATIONS_PKG)
+    second = storage.list_migrations()
+
+    assert len(second) > len(first)
+    assert exists("test-file2.txt")
+
+    invalidate_caches()  # Reset import caches
+
+    run(MIGRATIONS_PKG, down=True)
     third = storage.list_migrations()
 
     assert third == first

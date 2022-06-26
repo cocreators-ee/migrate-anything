@@ -17,7 +17,7 @@ def main():
     ap.add_argument('--down', action='store_true', help='Reverse last migration.')
 
     options = ap.parse_args()
-    run(options.package, options.down)
+    run(options.package, down=options.down)
 
 
 if __name__ == "__main__":
