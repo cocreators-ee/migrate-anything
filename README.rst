@@ -57,6 +57,9 @@ For more information check the `LICENSE <https://github.com/cocreators-ee/migrat
 Usage examples
 ==============
 
+Basic usage
+-----------
+
 Firstly you'll need this package in your project. Pick one of these:
 
 .. code-block:: python
@@ -129,13 +132,19 @@ Now in the real world you might want something more durable and a realistic exam
 
 This would configure storage to a ``my_db.migrations`` MongoDB collection.
 
-Future ideas include support for other DB engines (feel free to contribute),
-and Kubernetes ConfigMap. Annoyingly storage to Kubernetes from inside a pod
-and in code is not quite as simple as just running ``kubectl``.
 
-Oh and your Kubernetes pods will likely require the necessary RBAC rules to manage their ConfigMap. It's unfortunately kinda complex, but I'm sure you can figure it out e.g. with this `guide <https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/>`_.
+Command line flags
+-----------------------
+.. code-block:: shell
 
-Alternatively you can just write your own - it's easy.
+# Revert the last migration using migration code file.
+migrate-anything migrations --revert-latest
+
+
+Custom Storage Engines
+-----------------------
+
+Writing your own custom storage engine is easy.
 
 .. code-block:: python
 
@@ -205,6 +214,16 @@ And then to run the tests
     pytest
 
 When you have improvements to make, commit (and include any cleanup pre-commit might do), push your changes to your own fork, make a PR.
+
+
+Future ideas
+=================
+
+Future ideas include support for other DB engines (feel free to contribute),
+and Kubernetes ConfigMap. Annoyingly storage to Kubernetes from inside a pod
+and in code is not quite as simple as just running ``kubectl``.
+
+Oh and your Kubernetes pods will likely require the necessary RBAC rules to manage their ConfigMap. It's unfortunately kinda complex, but I'm sure you can figure it out e.g. with this `guide <https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/>`_.
 
 
 Financial support

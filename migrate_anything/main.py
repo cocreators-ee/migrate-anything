@@ -14,7 +14,11 @@ def main():
         "package", help="The Python package where your migrations are stored"
     )
 
-    ap.add_argument('--down', action='store_true', help='Reverse last migration.')
+    ap.add_argument(
+        "--revert-latest",
+        action="store_true",
+        help="Reverts last migration applied using migration file rather than migration stored in DB",
+    )
 
     options = ap.parse_args()
     run(options.package, down=options.down)
