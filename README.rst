@@ -51,7 +51,7 @@ License
 
 Licensing is important. This project uses BSD 3-clause license, and adds no other dependencies to your project (it does use a few things during build & testing) - that's about as simple, safe, and free to use as it gets.
 
-For more information check the `LICENSE <https://github.com/Lieturd/migrate-anything/blob/master/LICENSE>`_ -file.
+For more information check the `LICENSE <https://github.com/cocreators-ee/migrate-anything/blob/master/LICENSE>`_ -file.
 
 
 Usage examples
@@ -174,14 +174,32 @@ Alternatively you can just write your own - it's easy.
 
     configure(storage=CustomStorage("test.txt"))
 
-You can also check out the `examples <https://github.com/Lieturd/migrate-anything/tree/master/examples>`_.
+You can also check out the `examples <https://github.com/cocreators-ee/migrate-anything/tree/master/examples>`_.
 
 
 Contributing
 ============
 
-This project is run on GitHub using the issue tracking and pull requests here. If you want to contribute, feel free to `submit issues <https://github.com/Lieturd/migrate-anything/issues>`_ (incl. feature requests) or PRs here.
+This project is run on GitHub using the issue tracking and pull requests here. If you want to contribute, feel free to `submit issues <https://github.com/cocreators-ee/migrate-anything/issues>`_ (incl. feature requests) or PRs here.
 
+To set up development tools for this, run:
+
+.. code-block:: shell
+
+    virtualenv .venv
+
+    .venv/bin/activate
+    # OR
+    .venv\Scripts\activate.bat
+
+    pip install -r dev-requirements.txt
+    pip install -e .
+
+And then to run the tests
+
+.. code-block:: shell
+
+    pytest
 
 Financial support
 =================

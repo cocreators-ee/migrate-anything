@@ -1,15 +1,18 @@
 # Disable sudo to speed up the build
 sudo: false
 
-dist: trusty
+dist: focal
 
 language: python
 
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
   - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.9"
+  - "3.10"
+  - "3.11-dev"
+  - "3.12-dev"
   - "pypy"
   - "pypy3"
 
