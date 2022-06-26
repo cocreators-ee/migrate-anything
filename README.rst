@@ -135,10 +135,11 @@ This would configure storage to a ``my_db.migrations`` MongoDB collection.
 
 Command line flags
 -----------------------
+
 .. code-block:: shell
 
-# Revert the last migration using migration code file.
-migrate-anything migrations --revert-latest
+    #Revert the last migration using migration code file.
+    migrate-anything migrations --revert-latest
 
 
 Custom Storage Engines
