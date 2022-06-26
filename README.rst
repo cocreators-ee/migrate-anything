@@ -182,10 +182,13 @@ Contributing
 
 This project is run on GitHub using the issue tracking and pull requests here. If you want to contribute, feel free to `submit issues <https://github.com/cocreators-ee/migrate-anything/issues>`_ (incl. feature requests) or PRs here.
 
+You will need `pre-commit <https://pre-commit.com/#install>`_ set up to make contributions.
+
 To set up development tools for this, run:
 
 .. code-block:: shell
 
+    pre-commit install
     virtualenv .venv
 
     .venv/bin/activate
@@ -200,6 +203,9 @@ And then to run the tests
 .. code-block:: shell
 
     pytest
+
+When you have improvements to make, commit (and include any cleanup pre-commit might do), push your changes to your own fork, make a PR.
+
 
 Financial support
 =================
