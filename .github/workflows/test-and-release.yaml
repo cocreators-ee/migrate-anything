@@ -60,6 +60,8 @@ jobs:
     runs-on: ubuntu-20.04
     environment: Build
     steps:
+      - uses: actions/checkout@v2
+
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -71,6 +73,13 @@ jobs:
     environment: Build
     needs: tests
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Build package
+        run: |
+          python setup.py sdist bdist_wheel
+          twine check dist/*
+
       - name: Publish to PyPI
         if: github.ref == 'refs/heads/master'
         #if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
