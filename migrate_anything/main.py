@@ -17,11 +17,12 @@ def main():
     ap.add_argument(
         "--revert-latest",
         action="store_true",
+        dest="revert",
         help="Reverts last migration applied using migration file rather than migration stored in DB",
     )
 
     options = ap.parse_args()
-    run(options.package, down=options.down)
+    run(options.package, revert=options.revert)
 
 
 if __name__ == "__main__":

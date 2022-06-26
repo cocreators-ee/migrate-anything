@@ -147,8 +147,8 @@ def _apply_migrations(migrations):
         _CONFIG.storage.save_migration(name, _encode_module(module))
 
 
-def run(package, down=False):
-    if down:
+def run(package, revert=False):
+    if revert:
         run_one_down(package)
     else:
         run_auto_mode(package)

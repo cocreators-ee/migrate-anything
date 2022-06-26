@@ -101,7 +101,7 @@ def test_run():
 
 
 @clean_files([TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION])
-def test_run_with_down_mode():
+def test_run_with_revert_mode():
     storage = CSVStorage(TEST_CSV)
 
     assert len(storage.list_migrations()) == 0
@@ -126,7 +126,7 @@ def test_run_with_down_mode():
 
     invalidate_caches()  # Reset import caches
 
-    run(MIGRATIONS_PKG, down=True)
+    run(MIGRATIONS_PKG, revert=True)
     third = storage.list_migrations()
 
     assert third == first
