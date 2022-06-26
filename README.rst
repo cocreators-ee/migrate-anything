@@ -142,7 +142,7 @@ Command line flags
     migrate-anything migrations --revert-latest
 
 
-Custom Storage Engines
+Custom storage engines
 -----------------------
 
 Writing your own custom storage engine is easy.
