@@ -1,5 +1,5 @@
 codecov==2.1.12
-pytest==7.1.2
+pytest>=7.0.0
 twine>=1.15.0
 wheel==0.37.1
 mongomock==4.0.0
