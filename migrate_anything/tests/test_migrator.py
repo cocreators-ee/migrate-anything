@@ -69,10 +69,11 @@ def test_check_module():
 @clean_files([TEST_CSV, "test-file.txt", "test-file2.txt", NEW_MIGRATION])
 def test_run():
     storage = CSVStorage(TEST_CSV)
+    down_mode = False
 
     assert len(storage.list_migrations()) == 0
 
-    run(MIGRATIONS_PKG)
+    run(MIGRATIONS_PKG, down_mode)
     first = storage.list_migrations()
 
     assert len(first) > 0
@@ -84,7 +85,7 @@ def test_run():
     clean_filesystem()
     invalidate_caches()  # Reset import caches
 
-    run(MIGRATIONS_PKG)
+    run(MIGRATIONS_PKG, down_mode)
     second = storage.list_migrations()
 
     assert len(second) > len(first)
@@ -93,7 +94,7 @@ def test_run():
     clean_filesystem([NEW_MIGRATION])
     invalidate_caches()  # Reset import caches
 
-    run(MIGRATIONS_PKG)
+    run(MIGRATIONS_PKG, down_mode)
     third = storage.list_migrations()
 
     assert third == first
