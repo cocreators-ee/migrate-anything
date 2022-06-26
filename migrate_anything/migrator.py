@@ -177,6 +177,7 @@ def run_one_down(package):
         module = migrations[last_run_migration]
         module.down()
         _CONFIG.storage.remove_migration(last_run_migration)
+        logger.info("Migration {} reverted".format(last_run_migration))
     else:
         logger.info("Unable to find module for {}".format(last_run_migration))
 
