@@ -1,5 +1,4 @@
 import base64
-import imp
 import importlib
 import inspect
 import os
@@ -69,7 +68,8 @@ def _decode_module(name, b64):
     :param str code:
     :return types.Module:
     """
-    module = imp.new_module(name)
+    module_spec = importlib.machinery.ModuleSpec(name, None)
+    module = importlib.util.module_from_spec(module_spec)
     exec(_decode_code(b64), module.__dict__)
     return module
 
