@@ -1,4 +1,3 @@
-import imp
 from os.path import join, dirname, sep, exists
 
 import pytest
@@ -14,7 +13,7 @@ from migrate_anything.tests.common import (
 )
 
 try:
-    from importlib import invalidate_caches
+    from importlib import invalidate_caches, machinery, util
 except ImportError:
 
     def invalidate_caches():
@@ -50,17 +49,20 @@ NEW_MIGRATION = join(MIGRATIONS_PATH, "02-good-code.py")
 
 
 def test_check_module():
-    module = imp.new_module("test")
+    module_spec = machinery.ModuleSpec("test", None)
+    module = util.module_from_spec(module_spec)
     exec(GOOD_CODE, module.__dict__)
 
     _check_module(module)
 
-    module = imp.new_module("test2")
+    module_spec = machinery.ModuleSpec("test2", None) 
+    module = util.module_from_spec(module_spec)
     exec(WITHOUT_DOWN, module.__dict__)
     with pytest.raises(Exception):
         _check_module(module)
 
-    module = imp.new_module("test3")
+    module_spec = machinery.ModuleSpec("test3", None)
+    module = util.module_from_spec(module_spec)
     exec(WITHOUT_UP, module.__dict__)
     with pytest.raises(Exception):
         _check_module(module)
