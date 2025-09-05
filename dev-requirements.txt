@@ -1,7 +1,7 @@
 codecov==2.1.13
 pytest>=7.0.0
 twine>=1.15.0
-wheel==0.37.1
+wheel==0.38.1
 mongomock==4.3.0
 pymongo==4.1.1
 python-arango==5.2.1
