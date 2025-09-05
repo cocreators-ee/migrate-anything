@@ -82,7 +82,7 @@ jobs:
 
       - name: Set up dev dependencies
         run: |
-          python -m pip install -U pip
+          python -m pip install -U pip setuptools
           pip install -r dev-requirements.txt
 
       - name: Build package
