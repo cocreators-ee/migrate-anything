@@ -13,15 +13,12 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [
-          "3.7",
           "3.8",
           "3.9",
           "3.10",
           "3.11",
           "3.12",
           "3.13",
-          "pypy3.7",
-          "pypy3.8",
           "pypy3.9",
           "pypy3.10"
         ]
@@ -58,17 +55,18 @@ jobs:
           files: coverage-reports/coverage-python.xml
           flags: unittests
 
-  sonar:
-    runs-on: ubuntu-22.04
-    environment: Build
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  # Sonar keeps insisting it's not getting a token, so bye Sonar
+#  sonar:
+#    runs-on: ubuntu-22.04
+#    environment: Build
+#    steps:
+#      - uses: actions/checkout@v5
+#
+#      - name: SonarCloud Scan
+#        uses: SonarSource/sonarqube-scan-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   release:
     runs-on: ubuntu-22.04
